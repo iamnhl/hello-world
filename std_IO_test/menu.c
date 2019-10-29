@@ -42,25 +42,31 @@ void showMenu()
 			}
 			case WRITE_FILE:
 			{
-				
+				printf("请输入路径：");
+				scanf("%s",filename);
+				printf("请输入路径：");
+				scanf("%s",buf);
 				WriteFile(filename,buf);				
 				break;
 			}
 			case READ_FILE:
 			{
-			
+				printf("请输入路径：");
+				scanf("%s",filename);
 				ReadFile(filename);			
 				break;
 			}
 			case STAT_FILE:
 			{
-			
+				printf("请输入路径：");
+				scanf("%s",filename);
 				StatFile(filename);
 				break;
 			}
 			case CHMOD_FILE:
 			{
-			
+				printf("请输入路径：");
+				scanf("%s",filename);
 				ChmodFile(filename,S_IRWXG);			
 				break;
 			}
