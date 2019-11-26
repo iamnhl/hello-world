@@ -1,6 +1,7 @@
 #include "my.h"
 int main()
 {
+	int count=0;
 	pid_t r;
 	int r_num;
 	int pipefd[2];
@@ -19,23 +20,26 @@ int main()
 	}
 	else if(r==0)
 	{
+	close(pipefd[0]);		
+		while(write(pipefd[1],"0",1)>0)
+		{
+			printf("%d\n",count);
+			count++;	
+		}
 		close(pipefd[1]);
-		if((r_num=read(pipefd[0],buf,100))>0)
+		
+		exit(0);
+	}
+	else     
+	{
+		wait(NULL);
+		close(pipefd[1]);
+		if((r_num=read(pipefd[0],buf,4096))>0)
 		{
 			printf("child read from pipe:%s,total=%d\n",buf,r_num);		
 		}
 		close(pipefd[0]);
-		exit(0);
-	}
-	else
-	{
-		close(pipefd[0]);
-		if(write(pipefd[1],"0123456789",10)!=-1)
-		{
-			printf("parent write ok\n");
-			
-		}
-		close(pipefd[1]);
+		
 		return 0;
 	}
 	
