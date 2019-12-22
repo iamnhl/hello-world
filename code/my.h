@@ -11,3 +11,17 @@
  #include<string.h>
  #include<errno.h>
  #include<fcntl.h>
+ #include<pthread.h>
+ #include<limits.h>
+ #include<semaphore.h>
+ 
+ #define LOOP 10000000
+ #define NUM 4
+ #define TN 100 
+ #define WRITER_FIRST
+ #define check_error(return_val,msg){\
+		if(return_val != 0){\
+			fprintf(stderr,"%s:%s",msg,strerror(return_val));\
+			exit(-1);\
+		}\
+	 }
